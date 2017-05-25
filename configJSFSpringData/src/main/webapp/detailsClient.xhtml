@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Page Client</title>
+	<link rel="stylesheet" href="css/style.css" />
+</h:head>
+<h:body>
+<header>
+	<h1>Proxibanque</h1>
+	<p id="soustitre">La Banque proche de vous.</p>
+	</header>
+	<h:form>
+		<p:menubar>
+			<p:menuitem action="listeClients" value="Liste clients" />
+			<f:facet name="options">
+				<p:outputLabel class="barre"
+					value="Bonjour #{conseillerBean.conseiller.nom}, " />
+				<p:commandButton class="barre" type="submit" icon="ui-icon-extlink"
+					action="#{conseillerBean.deconnexion}" value="Déconnexion" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+
+	<h3>Désignation</h3>
+	<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
+		layout="grid" styleClass="ui-panelgrid-blank">
+		<h:outputLabel value="Nom :" for="#{clientBean.client.nom}" />
+		<h:outputText value="#{clientBean.client.nom}" />
+
+		<h:outputLabel value="Prenom :" for="#{clientBean.client.prenom}" />
+		<h:outputText value="#{clientBean.client.prenom}" />
+	</p:panelGrid>
+
+
+
+	<h3>Coordonnées</h3>
+	<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
+		layout="grid" styleClass="ui-panelgrid-blank">
+		<h:outputLabel value="Rue :" for="#{clientBean.client.adresse.rue}" />
+		<h:outputText value="#{clientBean.client.adresse.rue}" />
+
+		<h:outputLabel value="Code Postal :"
+			for="#{clientBean.client.adresse.codePostal}" />
+		<h:outputText value="#{clientBean.client.adresse.codePostal}" />
+
+		<h:outputLabel value="Ville :"
+			for="#{clientBean.client.adresse.ville}" />
+		<h:outputText value="#{clientBean.client.adresse.ville}" />
+	</p:panelGrid>
+
+
+	<h3>Contact</h3>
+	<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
+		layout="grid" styleClass="ui-panelgrid-blank">
+		<h:outputLabel value="Téléphone :"
+			for="#{clientBean.client.telephone}" />
+		<h:outputText value="#{clientBean.client.telephone}" />
+
+		<h:outputLabel value="Email :" for="#{clientBean.client.email}" />
+		<h:outputText value="#{clientBean.client.email}" />
+	</p:panelGrid>
+
+	<h:form>
+		<p:commandButton value="Modifier" action="modifierClient" />
+	</h:form>
+
+
+
+	<h2>Liste des comptes</h2>
+	<h:form>
+		<p:dataTable value="#{compteBean.comptes}" var="c" border="1">
+
+			<p:column>
+				<f:facet name="header">N° de Compte</f:facet>
+				<h:outputText value="#{c.numeroCompte}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Date d'ouverture</f:facet>
+				<h:outputText value="#{c.dateOuverture}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Solde</f:facet>
+				<h:outputText value="#{c.solde}€" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Virement</f:facet>
+				<p:commandLink action="#{virementBean.afficherVirement}"
+					value="Virement">
+					<f:setPropertyActionListener value="#{c}"
+						target="#{virementBean.compteDebiteur}" />
+				</p:commandLink>
+
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>

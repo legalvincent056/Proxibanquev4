@@ -1,0 +1,10 @@
+test\service\AllTests.class
+test\service\VirementComptes.class
+test\service\verificationLogin.class
+configJSFSpringData\Lanceur.class
+test\dao\CreationBDD.class
+test\service\RetourneClientParId.class
+test\service\GetCompteParId.class
+test\service\ModifierClient.class
+test\service\ListerClientsParConseiller.class
+test\service\AfficherConseiller.class

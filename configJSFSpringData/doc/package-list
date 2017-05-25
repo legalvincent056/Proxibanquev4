@@ -1,0 +1,7 @@
+com.huios.dao.springdata
+com.huios.mbeans
+com.huios.metier
+com.huios.service
+configJSFSpringData
+test.dao
+test.service

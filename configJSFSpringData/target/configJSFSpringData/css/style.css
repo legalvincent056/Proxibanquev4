@@ -1,0 +1,65 @@
+@CHARSET "UTF-8";
+
+
+
+
+body /*fond d'écran*/
+{
+	color:black;
+	background-image:url("fond-ecran.jpg");
+	background-size:cover;
+	background-attachment: fixed;
+
+}
+
+footer{
+	margin-bottom: 5px;
+}
+
+h1{
+	text-align: center;
+	font-size: 2em;
+	font-family: Maiandra GD;
+	margin-top:10px;
+	margin-bottom:4px;
+	
+}
+
+#soustitre{
+	text-align: center;
+	margin-top:5px;
+	font-family: Maiandra GD;	
+}
+
+#acceuil{
+	margin-top: 10%;
+ 	text-align: center;
+	
+}
+
+.connexion{
+    width:500px;
+    height: 200px;
+    	
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+    margin-top: 10%;
+    
+    border: 2px solid #0080ff;
+    border-radius:10px;
+    padding-left: 20px;
+}
+
+.barre{
+	display:inline;
+}
+
+
+panelGrid{
+	cellpadding:10px;
+	border:none;
+}

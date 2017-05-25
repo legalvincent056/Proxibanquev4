@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Authentification</title>
+	<link rel="stylesheet" href="css/style.css" />
+</h:head>
+<h:body>
+<header>
+	<h1>Proxibanque</h1>
+	<p id="soustitre">La Banque proche de vous.</p>
+	</header>
+	<div class="connexion">
+		<H2>Connexion Conseiller</H2>
+		<h:form>
+			<p:messages showDetail="true" autoUpdate="true" closable="true"/>
+			<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
+				layout="grid" styleClass="ui-panelgrid-blank">
+				<p:outputLabel value="Login" />
+				<p:inputText id="login" value="#{conseillerBean.conseiller.login}" required="true" label="Login"/>
+
+				<p:outputLabel value="Mot de passe" />
+				<p:password id="pwd" value="#{conseillerBean.conseiller.pwd}"
+					required="true" label="Mot de passe"/>
+			</p:panelGrid>
+			<p:commandButton action="#{conseillerBean.connexion}"
+				value="Se connecter"/>
+		</h:form>
+	</div>
+<footer>
+<a href="indexTOP.xhtml">Retour Identification</a>
+</footer>
+</h:body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Ajouter un client</title>
+	<link rel="stylesheet" href="css/style.css" />
+</h:head>
+<h:body>
+<header>
+	<h1>Proxibanque</h1>
+	<p id="soustitre">La Banque proche de vous.</p>
+	</header>
+	<h:form>
+		<p:menubar>
+			<p:menuitem action="listeClients" value="Liste clients" />
+			<p:menuitem action="detailsClient" value="Retour page client" />
+			<f:facet name="options">
+				<p:outputLabel class="barre"
+					value="Bonjour #{conseillerBean.conseiller.nom}, " />
+				<p:commandButton class="barre" type="submit" icon="ui-icon-extlink"
+					action="#{conseillerBean.deconnexion}" value="Déconnexion" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+	<h:form>
+	<h2>Ajout Client</h2>
+		<h3>Désignation</h3>
+		<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
+			layout="grid" styleClass="ui-panelgrid-blank">
+			<p:outputLabel value="Nom :" for="nom" />
+			<p:inputText id="nom" value="#{clientBean.client.nom}" />
+
+			<p:outputLabel value="Prenom :" for="prenom" />
+			<p:inputText id="prenom" value="#{clientBean.client.prenom}" />
+		</p:panelGrid>
+		<h3>Coordonnées</h3>
+		<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
+			layout="grid" styleClass="ui-panelgrid-blank">
+			<p:outputLabel value="Rue :" for="rue" />
+			<p:inputText id="rue" value="#{clientBean.client.adresse.rue}" />
+
+			<p:outputLabel value="Code Postal :" for="cp" />
+			<p:inputText id="cp" value="#{clientBean.client.adresse.codePostal}" />
+
+			<p:outputLabel value="Ville :" for="ville" />
+			<p:inputText id="ville" value="#{clientBean.client.adresse.ville}" />
+
+		</p:panelGrid>
+		<h3>Contact</h3>
+		<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
+			layout="grid" styleClass="ui-panelgrid-blank">
+			<p:outputLabel value="Téléphone :" for="tel" />
+			<p:inputText id="tel" value="#{clientBean.client.telephone}" />
+
+			<p:outputLabel value="Email :" for="email" />
+			<p:inputText id="email" value="#{clientBean.client.email}" />
+		</p:panelGrid>
+
+		<p:commandButton value="Ajouter"
+			action="#{clientBean.ajouterClient(conseillerBean.conseiller)}" />
+	</h:form>
+
+</h:body>
+</html>
