@@ -1,4 +1,4 @@
-# ProxiBanqueV4 - Vincent Le Gal - Théo villar - Florent Marin -Florent Ayraud
+# ProxiBanqueV4 - Vincent Le Gal - Théo Villar - Florent Marin -Florent Ayraud
 Comment lancer l'application Java ProxiBanqueV4
 
 Remarque : les messages d'erreurs ne sont pas tous implémentés (modification client par exemple).
@@ -51,4 +51,4 @@ Le projet a été realisé en Maven MonoModule.
 				mot de passe : demo2
 
 ## Consulter la documentation: 
-	- Double-cliquer sur le fichier index.html se trouvant dans le repertoire "doc" livré avec le fichier jar.
+	- Double-cliquer sur le fichier index.html se trouvant dans le repertoire "doc" livré avec le fichier war.
