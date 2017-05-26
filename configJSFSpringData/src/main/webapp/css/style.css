@@ -15,6 +15,25 @@ body /*fond d'écran*/
 footer{
 	margin-bottom: 5px;
 }
+.tablefoot{
+	width: 100%;
+	bottom: 0px;
+	position:absolute;
+	
+}
+td{
+	text-align:center;
+	width:33.33%;
+	padding-top:0px;
+}
+
+
+.copyright{
+	font-size:0.6em;
+	text-align: center;
+	
+	
+}
 
 h1{
 	text-align: center;
