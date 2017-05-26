@@ -101,6 +101,18 @@
 			</p:column>
 		</p:dataTable>
 	</h:form>
+	<br/>
+	<br/>
+	
+	<h:form>
+		<p:commandButton value="Ajouter Compte Courant" action="#{compteBean.ajouterCompteCourant(clientBean.client)}" />
+	</h:form>
+	<br/>
+
+	
+	<h:form>
+		<p:commandButton value="Ajouter Compte Epargne" action="ajouterCompteEpargne" />
+	</h:form>
 
 </h:body>
 </html>

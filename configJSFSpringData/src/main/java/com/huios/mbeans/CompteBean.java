@@ -1,8 +1,10 @@
 package com.huios.mbeans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.faces.bean.ManagedProperty;
 
@@ -10,13 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.SessionScope;
 
+import com.huios.metier.Client;
 import com.huios.metier.Compte;
+import com.huios.metier.CompteCourant;
 import com.huios.service.IServiceConseiller;
-
 
 @Controller
 @SessionScope
-public class CompteBean implements Serializable{
+public class CompteBean implements Serializable {
 	/**
 	 * 
 	 */
@@ -25,11 +28,18 @@ public class CompteBean implements Serializable{
 	@Autowired
 	private IServiceConseiller service;
 	
+	@Autowired
+	private Client client;
+	
+
 	private Collection<Compte> comptes;
 	@Autowired
-	@ManagedProperty(value="#{clientBean}")
+	@ManagedProperty(value = "#{clientBean}")
 	private ClientBean clientBean;
-	
+
+	@Autowired
+	private CompteCourant compteCourant;
+
 	public IServiceConseiller getService() {
 		return service;
 	}
@@ -54,7 +64,28 @@ public class CompteBean implements Serializable{
 	public void setClientBean(ClientBean clientBean) {
 		this.clientBean = clientBean;
 	}
+
+	public String ajouterCompteCourant(Client cl) {
+		setCompteCourant(new CompteCourant());
+		client=cl;
+		return "ajouterCompteCourant";
+	}
+
+	public CompteCourant getCompteCourant() {
+		return compteCourant;
+	}
+
+	public void setCompteCourant(CompteCourant compteCourant) {
+		this.compteCourant = compteCourant;
+	}
 	
-	
-	
+	public String creerCompteCourant(){
+		Date actuelle = new Date();
+		 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		 String dat = dateFormat.format(actuelle);
+		 compteCourant.setDateOuverture(dat);
+		service.ajouterCompte(client.getIdPersonne(), compteCourant);
+		return "detailsClient";
+	}
+
 }
