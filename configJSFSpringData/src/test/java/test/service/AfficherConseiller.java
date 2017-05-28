@@ -1,13 +1,11 @@
 package test.service;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.huios.metier.Conseiller;
 import com.huios.service.IServiceConseiller;
-import com.huios.service.ServiceImp;
 
 
 
