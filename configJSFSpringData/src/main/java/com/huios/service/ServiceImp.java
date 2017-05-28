@@ -166,9 +166,20 @@ public class ServiceImp implements IServiceConseiller, IServiceGerant {
 		
 		
 	}
+	@Override
+	public void deleteClient(Client client) {
+		daoP.delete(client.getIdPersonne());
+	}
 
+	@Override
+	public void deleteConseiller(Conseiller conseiller) {
+		daoC.delete(conseiller.getIdPersonne());
+	}
 
-	
-	
+	@Override
+	public void deleteCompte(Compte compte) {
+		daoCo.delete(compte.getNumeroCompte());
+	}
+
 	
 }

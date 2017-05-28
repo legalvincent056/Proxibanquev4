@@ -109,4 +109,7 @@ public interface IServiceConseiller {
 	public void ajouterCompte(long idPersonne , Compte compte);
 	
 	public void ajouterAdresse(long idPersonne,Adresse adresse);
+	public void deleteClient(Client client);
+	public void deleteCompte(Compte compte);
+	public void deleteConseiller(Conseiller conseiller);
 }
