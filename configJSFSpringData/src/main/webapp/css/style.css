@@ -14,11 +14,15 @@ body /*fond d'écran*/
 
 footer{
 	margin-bottom: 5px;
+	position: absolute;
+	width:100%;
+	padding-top:40px;
 }
 .tablefoot{
 	width: 100%;
-	bottom: 0px;
-	position:fixed;
+	position:absolute;
+	text-align: center;
+	width:100%;
 	
 }
 td{
