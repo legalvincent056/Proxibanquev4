@@ -3,15 +3,9 @@ package configJSFSpringData;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.huios.metier.Adresse;
-import com.huios.metier.Agence;
 import com.huios.metier.Client;
 import com.huios.metier.Compte;
 import com.huios.metier.CompteCourant;
@@ -24,16 +18,13 @@ import com.huios.service.IServiceGerant;
 public class Lanceur {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-		// TODO Auto-generated method stub
 				//1- Chargement du container et creation des beans
 				ClassPathXmlApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 				//2- récuperation d'un bean
 				IServiceGerant isg =  (IServiceGerant) appContext.getBean("serviceImp");
 				IServiceConseiller isc = (IServiceConseiller) appContext.getBean("serviceImp");
 				Gerant gerant1 = (Gerant) appContext.getBean("gerant");
-				Gerant gerant2 = (Gerant) appContext.getBean("gerant");
 				Conseiller conseiller1 = (Conseiller) appContext.getBean("conseiller");
 				Conseiller conseiller2 = (Conseiller) appContext.getBean("conseiller");
 				Client client1 = (Client) appContext.getBean("client");
@@ -143,7 +134,6 @@ public class Lanceur {
 				conseiller1.setGerant(gerant1);
 				conseiller2.setGerant(gerant1);
 				
-				Agence agence = new Agence("1", 24052017);
 				
 				gerant1= new Gerant("Flantier", "noel", "007", "ae@mail", conseillers);
 				
@@ -182,7 +172,7 @@ public class Lanceur {
 				isc.ajouterCompte(client3.getIdPersonne(), compteEp2);
 				isc.ajouterCompte(client4.getIdPersonne(), compte3);
 				isc.ajouterCompte(client4.getIdPersonne(), compteEp3);
-
+				appContext.close();
 
 		
 	}
