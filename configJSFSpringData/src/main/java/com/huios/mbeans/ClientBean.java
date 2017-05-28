@@ -80,6 +80,10 @@ public class ClientBean implements Serializable {
 		service.modifierClient(client);
 		return "detailsClient";
 	}
+	public void delete(){
+		service.deleteClient(client);
+		client = new Client();
+	}
 
 	
 	public String ajouterClient(Conseiller conseiller){ //A voir pour ajouter adresse

@@ -27,11 +27,10 @@ public class CompteBean implements Serializable {
 
 	@Autowired
 	private IServiceConseiller service;
-	
 	@Autowired
 	private Client client;
-	
-
+	@Autowired
+	private Compte compte;
 	private Collection<Compte> comptes;
 	@Autowired
 	@ManagedProperty(value = "#{clientBean}")
@@ -39,6 +38,22 @@ public class CompteBean implements Serializable {
 
 	@Autowired
 	private CompteCourant compteCourant;
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Compte getCompte() {
+		return compte;
+	}
+
+	public void setCompte(Compte compte) {
+		this.compte = compte;
+	}
 
 	public IServiceConseiller getService() {
 		return service;
@@ -86,6 +101,11 @@ public class CompteBean implements Serializable {
 		 compteCourant.setDateOuverture(dat);
 		service.ajouterCompte(client.getIdPersonne(), compteCourant);
 		return "detailsClient";
+	}
+	public void delete(){
+		service.deleteCompte(compte);
+		compte = new Compte();
+
 	}
 
 }

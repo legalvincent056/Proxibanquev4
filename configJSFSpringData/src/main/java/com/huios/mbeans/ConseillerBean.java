@@ -78,7 +78,10 @@ public class ConseillerBean implements Serializable {
 			return "listeClients";
 		}
 	}
-	
+	public void delete(){
+		service.deleteConseiller(conseiller);
+		conseiller = new Conseiller();
+	}
 	public String deconnexion(){
 		conseiller = new Conseiller();
 		return "index";
