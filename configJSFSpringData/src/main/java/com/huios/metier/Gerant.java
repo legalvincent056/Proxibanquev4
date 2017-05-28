@@ -45,7 +45,6 @@ public class Gerant extends Personne {
 	public Gerant(String nom, String prenom, String telephone, String email, Collection<Conseiller> conseillers) {
 		super(nom, prenom, telephone, email);
 		this.conseillers = conseillers;
-		this.agence = agence;
 	}
 
 	public Agence getAgence() {
