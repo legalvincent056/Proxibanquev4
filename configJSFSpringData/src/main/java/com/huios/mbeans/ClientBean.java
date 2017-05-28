@@ -1,7 +1,6 @@
 package com.huios.mbeans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.faces.bean.ManagedProperty;
