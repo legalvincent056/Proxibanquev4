@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope("prototype")
 @DiscriminatorColumn(name = "TYPE_COMPTE")
-public abstract class Compte {
+public class Compte {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
