@@ -41,7 +41,7 @@ public class GerantBean implements Serializable{
 	
 	public String connexion() {
 		gerant = service.verificationLoginGerant(gerant.getLogin(), gerant.getPwd());
-		if (gerant.equals(null)) {
+		if (gerant == null) {
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Connexion échouée, mot de passe/login invalides", null));
 			gerant = new Gerant();
