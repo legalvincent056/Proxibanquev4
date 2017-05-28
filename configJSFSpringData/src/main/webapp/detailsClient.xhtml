@@ -97,7 +97,13 @@
 					<f:setPropertyActionListener value="#{c}"
 						target="#{virementBean.compteDebiteur}" />
 				</p:commandLink>
-
+			</p:column>
+			<p:column>
+				<f:facet name="header">Action</f:facet>			
+				<h:commandLink action="#{compteBean.delete}" value="Suppr"  >
+					<f:setPropertyActionListener value="#{c}" 
+						target="#{compteBean.compte}" /> 
+				</h:commandLink>
 			</p:column>
 		</p:dataTable>
 	</h:form>

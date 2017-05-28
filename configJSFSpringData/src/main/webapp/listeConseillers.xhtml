@@ -40,8 +40,13 @@
 			<p:column>
 				<f:facet name="header">Prénom</f:facet>
 				<h:outputText value="#{c.prenom}" />
-
 			</p:column>
+			<p:column>
+				<f:facet name="header">Action</f:facet>
+					<h:commandLink action="#{conseillerBean.delete}" value="Suppr"  id="suppr" >
+				<f:setPropertyActionListener value="#{c}" target="#{conseillerBean.conseiller}"/>	
+				</h:commandLink>				
+			</p:column>	
 		</p:dataTable>
 	</h:form>
 	<H3>Accès au graphique de suivi Virement</H3>

@@ -48,8 +48,13 @@
 					<f:setPropertyActionListener value="#{c}"
 						target="#{clientBean.client}" />
 				</h:commandLink>
-
 			</p:column>
+			<p:column>
+				<f:facet name="header">Action</f:facet>
+				<h:commandLink action="#{clientBean.delete}" value="Suppr" >
+				<f:setPropertyActionListener value="#{c}" target="#{clientBean.client}"/>	
+				</h:commandLink>				
+			</p:column>	
 		</p:dataTable>
 	</h:form>
 <p:commandButton icon="fa-user-plus" action="#{clientBean.nouveau}" value="Ajouter un Client"/>
