@@ -89,6 +89,8 @@ public class CompteBean implements Serializable {
 	}
 
 	public Collection<Compte> getComptesDecouvert() {
+		 comptesDecouvert.clear();
+		 setComptesDecouvert(serviceG.listeCompteDecouvert(gerantBean.getGerant()));
 		return comptesDecouvert;
 	}
 
