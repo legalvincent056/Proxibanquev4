@@ -1,2 +1,0 @@
-save et regénérer nvl version du war apres dernier ajout avant push final
-warning bizard dans xhtml
