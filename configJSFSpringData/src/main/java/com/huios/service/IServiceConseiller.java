@@ -5,6 +5,8 @@ import java.util.Collection;
 import com.huios.metier.Adresse;
 import com.huios.metier.Client;
 import com.huios.metier.Compte;
+import com.huios.metier.CompteCourant;
+import com.huios.metier.CompteEpargne;
 import com.huios.metier.Conseiller;
 
 
@@ -55,6 +57,9 @@ public interface IServiceConseiller {
 	 * @return Les comptes du client
 	 */
 	public Collection<Compte> listerComptesClient(Client client);
+	public Collection<CompteCourant> listerComptesCourantClient(Client client);
+	public Collection<CompteEpargne> listerComptesEpargneClient(Client client);
+
 
 	/**
 	 * Retourne un client correspondant a l'Id
@@ -112,4 +117,7 @@ public interface IServiceConseiller {
 	public void deleteClient(Client client);
 	public void deleteCompte(Compte compte);
 	public void deleteConseiller(Conseiller conseiller);
+	public void supprimerCompteEpargne(CompteEpargne compteEpargneASupprimer);
+	public void supprimerCompteCourant(CompteCourant compteCourantASupprimer);
+	public void modifierConseiller(Conseiller conseiller);
 }

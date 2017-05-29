@@ -1,5 +1,6 @@
 package com.huios.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,14 @@ public class ServiceImp implements IServiceConseiller, IServiceGerant {
 	@Autowired
 	private IDaoConseiller daoC;
 	
-	
 	@Autowired
 	private IDaoCompte daoCo;
-
-	
+	@Autowired
+	private Collection<Compte> comptes;
+	@Autowired
+	private Collection<CompteCourant> comptesCourant;
+	@Autowired
+	private Collection<CompteEpargne> comptesEpargne;
 	
 	@Override
 	public Conseiller verificationLogin(String login, String pwd) {
@@ -117,17 +121,8 @@ public class ServiceImp implements IServiceConseiller, IServiceGerant {
 	@Override
 	public void ajouterClient(long idConseiller, Client client) {
 		Conseiller cons = daoC.findOne(idConseiller);
-		//Collection<Client> clients = daoP.listerClientsParConseiller(cons);
-		
-		//if(clients.size()>=10){
-			client.setConseiller(cons);
-			
-			daoP.save(client);
-					
-		//}
-			
-		
-		
+		client.setConseiller(cons);
+		daoP.save(client);
 	}
 
 	@Override
@@ -135,13 +130,11 @@ public class ServiceImp implements IServiceConseiller, IServiceGerant {
 		Gerant gerant=daoG.findOne(idPersonne);
 		conseiller.setGerant(gerant);
 		daoC.save(conseiller);
-		
 	}
 
 	@Override
 	public void ajouterGerant(Gerant gerant) {
 		daoG.save(gerant);
-		
 	}
 
 	@Override
@@ -149,12 +142,10 @@ public class ServiceImp implements IServiceConseiller, IServiceGerant {
 		Client client=daoP.findOne(idPersonne);
 		compte.setClient(client);
 		daoCo.save(compte);
-		
 	}
 
 	@Override
 	public Collection<Conseiller> listerConseillerParGerant(Gerant gerant) {
-		
 		return daoG.listerConseillerParGerant(gerant);
 	}
 
@@ -163,8 +154,6 @@ public class ServiceImp implements IServiceConseiller, IServiceGerant {
 		Client client=daoP.findOne(idPersonne);
 		client.setAdresse(adresse);
 		daoA.save(adresse);
-		
-		
 	}
 	@Override
 	public void deleteClient(Client client) {
@@ -181,5 +170,68 @@ public class ServiceImp implements IServiceConseiller, IServiceGerant {
 		daoCo.delete(compte.getNumeroCompte());
 	}
 
+	@Override
+	public void supprimerCompteEpargne(CompteEpargne compteEpargneASupprimer) {
+		daoCo.delete(compteEpargneASupprimer);
+	}
+
+	@Override
+	public void supprimerCompteCourant(CompteCourant compteCourantASupprimer) {
+		daoCo.delete(compteCourantASupprimer);
+	}
+
+	@Override
+	public void modifierConseiller(Conseiller conseiller) {
+		daoC.save(conseiller);
+		if (conseiller.getAdresse()!= null)
+			daoA.save(conseiller.getAdresse());
+	}
+
+	@Override
+	public Collection<Compte> listeCompteDecouvert(Gerant gerant) {
+		Collection<Conseiller> conseillers= daoG.listerConseillerParGerant(gerant);
+		Collection<Compte> comptes = new ArrayList<>();
+		for (Conseiller co : conseillers){
+			Collection<Client> clients = new ArrayList<>();
+			clients = listerClientsParConseiller(co);
+			for(Client cl : clients ){
+				Collection<Compte> comptescl = new ArrayList<>();
+				comptescl = listerComptesClient(cl);
+				for(Compte c : comptescl){
+					if(c.getSolde()<0){
+						comptes.add(c);
+					}
+				}
+			}
+		}
+		return comptes;
+	}
+
+	@Override
+	public Collection<CompteCourant> listerComptesCourantClient(Client client) {
+		comptes.clear();
+		comptes = daoCo.listerComptesClient(client);
+		comptesCourant= new ArrayList<>();
+		for (Compte c : comptes){
+		if (c instanceof CompteCourant)
+			comptesCourant.add((CompteCourant)c);
+		}
+		return comptesCourant;
+	}
+
+	@Override
+	public Collection<CompteEpargne> listerComptesEpargneClient(Client client) {
+		comptes.clear();
+		comptes = daoCo.listerComptesClient(client);
+		comptesEpargne= new ArrayList<>();
+		for (Compte c : comptes){
+			if (c instanceof CompteEpargne)
+				comptesEpargne.add((CompteEpargne)c);
+		}
+		return comptesEpargne;
+	}
+	
+	
 	
 }
+
