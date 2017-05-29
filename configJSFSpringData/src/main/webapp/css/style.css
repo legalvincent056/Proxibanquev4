@@ -6,7 +6,7 @@
 body /*fond d'écran*/
 {
 	color:black;
-	background-image:url("fond-ecran.jpg");
+	background-image:url("fond.jpg");
 	background-size:cover;
 	background-attachment: fixed;
 
