@@ -125,7 +125,7 @@ public class ConseillerBean implements Serializable {
 		if (conseiller == null) {
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-								"Connexion échouée, mot de passe/login invalides", null));
+								"Connexion échouée, mot de passe/login invalides", " "));
 			conseiller = new Conseiller();
 			return "index";
 		} else {
