@@ -40,7 +40,4 @@ public class CompteCourant extends Compte {
 	public String toString() {
 		return "CompteCourant [decouvert=" + decouvert + "]";
 	}
-
-
-
 }

@@ -22,7 +22,7 @@ public class Compte {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long numeroCompte;
-	private double solde;
+	private double solde = 0;
 	private String dateOuverture;
 	@ManyToOne
 	private Client client;
@@ -77,7 +77,6 @@ public class Compte {
 		this.client = client;
 		this.carteBancaire = carteBancaire;
 	}
-
 	
 	public Compte(double solde, String dateOuverture) {
 		super();
@@ -93,7 +92,4 @@ public class Compte {
 	public String toString() {
 		return "Compte [numeroCompte=" + numeroCompte + ", solde=" + solde + ", dateOuverture=" + dateOuverture + "]";
 	}
-
-
-
 }
