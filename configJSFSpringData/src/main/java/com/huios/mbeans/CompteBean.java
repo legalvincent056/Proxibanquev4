@@ -3,6 +3,7 @@ package com.huios.mbeans;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -15,7 +16,9 @@ import org.springframework.web.context.annotation.SessionScope;
 import com.huios.metier.Client;
 import com.huios.metier.Compte;
 import com.huios.metier.CompteCourant;
+import com.huios.metier.CompteEpargne;
 import com.huios.service.IServiceConseiller;
+import com.huios.service.IServiceGerant;
 
 @Controller
 @SessionScope
@@ -28,6 +31,8 @@ public class CompteBean implements Serializable {
 	@Autowired
 	private IServiceConseiller service;
 	@Autowired
+	private IServiceGerant serviceG;
+	@Autowired
 	private Client client;
 	@Autowired
 	private Compte compte;
@@ -35,9 +40,85 @@ public class CompteBean implements Serializable {
 	@Autowired
 	@ManagedProperty(value = "#{clientBean}")
 	private ClientBean clientBean;
-
+	@Autowired
+	private GerantBean gerantBean;
+	private Collection<Compte> comptesDecouvert = new ArrayList<>();
 	@Autowired
 	private CompteCourant compteCourant;
+	@Autowired
+	private CompteEpargne compteEpargne;
+	@Autowired
+	private CompteCourant compteCourantASupprimer;
+	@Autowired
+	private CompteEpargne compteEpargneASupprimer;
+	private Collection<CompteCourant> comptesCourant = new ArrayList<>();
+	private Collection<CompteEpargne> comptesEpargne = new ArrayList<>();
+
+	public Collection<CompteCourant> getComptesCourant() {
+		Collection<CompteCourant> cs = service.listerComptesCourantClient(clientBean.getClient());
+		return cs;
+	}
+
+	public void setComptesCourant(Collection<CompteCourant> comptesCourant) {
+		this.comptesCourant = comptesCourant;
+	}
+
+	public Collection<CompteEpargne> getComptesEpargne() {
+		Collection<CompteEpargne> ce = service.listerComptesEpargneClient(clientBean.getClient());
+		return ce;
+	}
+
+	public void setComptesEpargne(Collection<CompteEpargne> comptesEpargne) {
+		this.comptesEpargne = comptesEpargne;
+	}
+
+	public IServiceGerant getServiceG() {
+		return serviceG;
+	}
+
+	public void setServiceG(IServiceGerant serviceG) {
+		this.serviceG = serviceG;
+	}
+
+	public GerantBean getGerantBean() {
+		return gerantBean;
+	}
+
+	public void setGerantBean(GerantBean gerantBean) {
+		this.gerantBean = gerantBean;
+	}
+
+	public Collection<Compte> getComptesDecouvert() {
+		return comptesDecouvert;
+	}
+
+	public void setComptesDecouvert(Collection<Compte> comptesDecouvert) {
+		this.comptesDecouvert = comptesDecouvert;
+	}
+
+	public CompteEpargne getCompteEpargne() {
+		return compteEpargne;
+	}
+
+	public void setCompteEpargne(CompteEpargne compteEpargne) {
+		this.compteEpargne = compteEpargne;
+	}
+
+	public CompteCourant getCompteCourantASupprimer() {
+		return compteCourantASupprimer;
+	}
+
+	public void setCompteCourantASupprimer(CompteCourant compteCourantASupprimer) {
+		this.compteCourantASupprimer = compteCourantASupprimer;
+	}
+
+	public CompteEpargne getCompteEpargneASupprimer() {
+		return compteEpargneASupprimer;
+	}
+
+	public void setCompteEpargneASupprimer(CompteEpargne compteEpargneASupprimer) {
+		this.compteEpargneASupprimer = compteEpargneASupprimer;
+	}
 
 	public Client getClient() {
 		return client;
@@ -85,6 +166,12 @@ public class CompteBean implements Serializable {
 		client=cl;
 		return "ajouterCompteCourant";
 	}
+	public String ajouterCompteEpargne(Client cl) {
+		setCompteEpargne(new CompteEpargne());
+		client=cl;
+		return "ajouterCompteEpargne";
+	}
+	
 
 	public CompteCourant getCompteCourant() {
 		return compteCourant;
@@ -107,5 +194,41 @@ public class CompteBean implements Serializable {
 		compte = new Compte();
 
 	}
-
+	 public String creerCompteEpargne(){
+		 Date actuelle = new Date();
+		 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		 String dat = dateFormat.format(actuelle);
+		 compteEpargne.setDateOuverture(dat);
+		 service.ajouterCompte(client.getIdPersonne(), compteEpargne);
+		 return "detailsClient";
+		 }
+	 public String listeComptesDecouvert(){
+		 getComptesDecouvert();
+		 return "listeComptesDecouvert";
+	 }
+	 public String supprimerCompteCourant(){
+		service.supprimerCompteCourant(compteCourantASupprimer);
+		return clientBean.afficherDetails();
+	 }
+	 public String supprimerCompteEpargne(){
+		service.supprimerCompteEpargne(compteEpargneASupprimer);
+		return clientBean.afficherDetails();
+	 }
+	 
+	 public String verificationSoldeCompteCourant(){
+		 if(compteCourantASupprimer.getSolde()==0){
+			 return "suppressionCompteCourant";
+		 }
+		 else{
+			 return "erreurSuppressionCompteCourant";
+		 }
+	 }
+	 public String verificationSoldeCompteEpargne(){
+		 if(compteEpargneASupprimer.getSolde()==0){
+			 return "suppressionCompteEpargne";
+		 }
+		 else{
+			 return "erreurSuppressionCompteEpargne";
+		 }
+	 }
 }

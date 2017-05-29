@@ -97,5 +97,11 @@ public class ClientBean implements Serializable {
 		client.setAdresse(adresse);
 		return "ajouterClient";
 	}
+	public String modifierConseiller(){
+		client.setConseiller(conseillerBean.getConseiller());
+		service.modifierClient(client);
+		return "detailsConseiller";
+	}
+	
 	
 }

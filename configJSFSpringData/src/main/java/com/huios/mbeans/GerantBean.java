@@ -56,7 +56,4 @@ public class GerantBean implements Serializable{
 		return "indexGerant";
 		
 	}
-	
-	
-
 }
