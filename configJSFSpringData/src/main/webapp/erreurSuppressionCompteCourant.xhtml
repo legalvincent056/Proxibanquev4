@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title> Erreur suppression d'un compte</title>
+	<link rel="stylesheet" href="css/style.css" />
+</h:head>
+<h:body>
+<header>
+	<h1>Proxibanque</h1>
+	<p id="soustitre">La Banque proche de vous.</p>
+	</header>
+	<h:form>
+		<p:menubar>
+		<p:menuitem action="listeClients" value="Liste clients" />
+		<f:facet name="options">
+			<p:outputLabel class="barre" value="Bonjour #{conseillerBean.conseiller.nom}, " />
+			 <p:splitButton value="MonCompte" >
+        <p:menuitem value="Changement mots de Passe"   action="changementPWD" />
+
+    </p:splitButton>
+            <p:commandButton class="barre" type="submit" icon="ui-icon-extlink" action="#{conseillerBean.deconnexion}" value="Déconnexion"/>
+            	
+         </f:facet>
+       </p:menubar>
+	</h:form>
+	<h2> suppression du compte</h2>
+	<br/>
+	<h4>Le compte ne peux etre supprimer car son solde n'est pas nul.</h4>
+	<h4>Effectuez un virement</h4>
+	<br/>
+	<h:form>
+		<p:dataTable value="#{compteBean.compteCourantASupprimer}" var="c" border="1">
+
+			<p:column>
+				<f:facet name="header">N° de Compte</f:facet>
+				<h:outputText value="#{c.numeroCompte}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Date d'ouverture</f:facet>
+				<h:outputText value="#{c.dateOuverture}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Solde</f:facet>
+				<h:outputText value="#{c.solde}€" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Virement</f:facet>
+				<p:commandLink action="#{virementBean.afficherVirement}"
+					value="Virement">
+					<f:setPropertyActionListener value="#{c}"
+						target="#{virementBean.compteDebiteur}" />
+				</p:commandLink>
+
+			</p:column>
+			
+		</p:dataTable>
+	</h:form>
+
+	
+
+	<h:form>
+		<p:commandButton value="Annuler" action="detailsClient" />
+	</h:form>
+
+</h:body>
+</html>

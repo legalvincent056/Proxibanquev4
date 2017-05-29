@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Accueil Gerant</title>
+	<link rel="stylesheet" href = "css/style.css" />
+</h:head>
+<h:body>
+<header>
+	<h1>Proxibanque</h1>
+	<p id="soustitre">La Banque proche de vous.</p>
+	</header>
+	<h:form>
+		<p:menubar>
+		<f:facet name="options">
+			<p:outputLabel class="barre" value="Bonjour #{gerantBean.gerant.nom}, " />
+            <p:commandButton class="barre" type="submit" icon="ui-icon-extlink" action="#{gerantBean.deconnexion}" value="Déconnexion"/>
+         </f:facet>
+       </p:menubar>
+	</h:form>
+	
+	<h2>Liste des comptes à découvert</h2>
+	<h:form>
+		<p:dataTable value="#{compteBean.comptesDecouvert}" var="c" border="1">
+
+			<p:column>
+				<f:facet name="header">N° de Compte</f:facet>
+				<h:outputText value="#{c.numeroCompte}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Date d'ouverture</f:facet>
+				<h:outputText value="#{c.dateOuverture}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Solde</f:facet>
+				<h:outputText value="#{c.solde}€" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">alert</f:facet>
+				<p:commandLink action="#{virementBean.afficherVirement}"
+					value="Virement">
+					<f:setPropertyActionListener value="#{c}"
+						target="#{virementBean.compteDebiteur}" />
+				</p:commandLink>
+
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

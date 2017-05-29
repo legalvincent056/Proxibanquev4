@@ -19,6 +19,10 @@
 			<f:facet name="options">
 				<p:outputLabel class="barre"
 					value="Bonjour #{conseillerBean.conseiller.nom}, " />
+					<p:splitButton value="MonCompte" >
+					 <p:menuitem value="Changement mots de Passe"   action="changementPWD" />
+					 </p:splitButton>
+				
 				<p:commandButton class="barre" type="submit" icon="ui-icon-extlink"
 					action="#{conseillerBean.deconnexion}" value="Déconnexion" />
 			</f:facet>
@@ -69,11 +73,11 @@
 		<p:commandButton value="Modifier" action="modifierClient" />
 	</h:form>
 
-
-
-	<h2>Liste des comptes</h2>
+	
+<br/>
+<h2>Liste des comptes Courant</h2>
 	<h:form>
-		<p:dataTable value="#{compteBean.comptes}" var="c" border="1">
+		<p:dataTable value="#{compteBean.comptesCourant}" var="c" border="1">
 
 			<p:column>
 				<f:facet name="header">N° de Compte</f:facet>
@@ -91,19 +95,27 @@
 
 			</p:column>
 			<p:column>
+				<f:facet name="header">Decouvert autorisé</f:facet>
+				<h:outputText value="#{c.decouvert}€" />
+
+			</p:column>
+			<p:column>
 				<f:facet name="header">Virement</f:facet>
 				<p:commandLink action="#{virementBean.afficherVirement}"
 					value="Virement">
 					<f:setPropertyActionListener value="#{c}"
 						target="#{virementBean.compteDebiteur}" />
 				</p:commandLink>
+
 			</p:column>
 			<p:column>
-				<f:facet name="header">Action</f:facet>			
-				<h:commandLink action="#{compteBean.delete}" value="Suppr"  >
-					<f:setPropertyActionListener value="#{c}" 
-						target="#{compteBean.compte}" /> 
-				</h:commandLink>
+				<f:facet name="header">Supprimmer</f:facet>
+				<p:commandLink action="#{compteBean.verificationSoldeCompteCourant}"
+					value="Supprimer">
+					<f:setPropertyActionListener value="#{c}"
+						target="#{compteBean.compteCourantASupprimer}" />
+				</p:commandLink>
+
 			</p:column>
 		</p:dataTable>
 	</h:form>
@@ -111,14 +123,57 @@
 	<br/>
 	
 	<h:form>
-		<p:commandButton value="Ajouter Compte Courant" action="#{compteBean.ajouterCompteCourant(clientBean.client)}" />
+		<p:commandButton value="Ouvrir un Compte Courant" action="#{compteBean.ajouterCompteCourant(clientBean.client)}" />
 	</h:form>
 	<br/>
-
-	
+	<h2>Liste des comptes Epargne</h2>
 	<h:form>
-		<p:commandButton value="Ajouter Compte Epargne" action="ajouterCompteEpargne" />
+		<p:dataTable value="#{compteBean.comptesEpargne}" var="c" border="1">
+
+			<p:column>
+				<f:facet name="header">N° de Compte</f:facet>
+				<h:outputText value="#{c.numeroCompte}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Date d'ouverture</f:facet>
+				<h:outputText value="#{c.dateOuverture}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Solde</f:facet>
+				<h:outputText value="#{c.solde}€" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Taux remuneration</f:facet>
+				<h:outputText value="#{c.remuneration}€" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Virement</f:facet>
+				<p:commandLink action="#{virementBean.afficherVirement}"
+					value="Virement">
+					<f:setPropertyActionListener value="#{c}"
+						target="#{virementBean.compteDebiteur}" />
+				</p:commandLink>
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Supprimmer</f:facet>
+				<p:commandLink action="#{compteBean.verificationSoldeCompteEpargne}"
+					value="Supprimer">
+					<f:setPropertyActionListener value="#{c}"
+						target="#{compteBean.compteEpargneASupprimer}" />
+				</p:commandLink>
+
+			</p:column>
+		</p:dataTable>
 	</h:form>
+	<h:form>
+		<p:commandButton value="Ouvrir un Compte Epargne" action="#{compteBean.ajouterCompteEpargne(clientBean.client)}" />
+	</h:form>
+	
 
 </h:body>
 </html>

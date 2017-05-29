@@ -5,8 +5,8 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta charset="UTF-8" />
-	<title>Liste des conseillers</title>
-	<link rel="stylesheet" href = "css/style.css" />
+	<title>Transfer Client</title>
+	<link rel="stylesheet" href="css/style.css" />
 </h:head>
 <h:body>
 <header>
@@ -15,15 +15,18 @@
 	</header>
 	<h:form>
 		<p:menubar>
-		<f:facet name="options">
-			<p:outputLabel class="barre" value="Bonjour #{gerantBean.gerant.nom}, " />
-            <p:commandButton class="barre" type="submit" icon="ui-icon-extlink" action="#{gerantBean.deconnexion}" value="Déconnexion"/>
-         </f:facet>
-       </p:menubar>
+			<p:menuitem action="listeConseillers" value="Liste conseillers" />
+			<f:facet name="options">
+				<p:outputLabel class="barre"
+					value="Bonjour #{gerantBean.gerant.nom}, " />
+				<p:commandButton class="barre" type="submit" icon="ui-icon-extlink"
+					action="#{gerantBean.deconnexion}" value="Déconnexion" />
+			</f:facet>
+		</p:menubar>
 	</h:form>
-	
-	<h2>Liste des conseillers</h2>
-	
+
+
+	<h3>Choisir un nouveau conseiller</h3>
 	<h:form>
 		<p:dataTable value="#{conseillerBean.conseillers}" var="c" border="1" style="width: 700">
 
@@ -40,11 +43,12 @@
 			<p:column>
 				<f:facet name="header">Prénom</f:facet>
 				<h:outputText value="#{c.prenom}" />
+
 			</p:column>
 			<p:column>
-				<f:facet name="header">Détails</f:facet>
-				<h:commandLink action="#{conseillerBean.afficherDetails}"
-					value="Details">
+				<f:facet name="header">Choisir</f:facet>
+				<h:commandLink action="#{clientBean.modifierConseiller}"
+					value="Choisir">
 					<f:setPropertyActionListener value="#{c}"
 						target="#{conseillerBean.conseiller}" />
 				</h:commandLink>
@@ -52,18 +56,6 @@
 			</p:column>
 		</p:dataTable>
 	</h:form>
-	<br/>
-	<p:commandButton value=" Ajouter un conseiller"
-			action="#{conseillerBean.nouveau}" />
-	<H3>Accès au graphique de suivi Virement</H3>
-	<br/>
-	<p:commandButton value="accéder au graphique"
-			action="pie.xhtml" />
-			
 
-<H3>Accès a la liste des Comptes à découvert</H3>
-	<br/>
-	<p:commandButton value="accéder liste"
-			action="#{compteBean.listeComptesDecouvert}" />
 </h:body>
 </html>

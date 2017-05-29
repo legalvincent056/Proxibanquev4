@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Details Conseiller</title>
+	<link rel="stylesheet" href="css/style.css" />
+</h:head>
+<h:body>
+<header>
+	<h1>Proxibanque</h1>
+	<p id="soustitre">La Banque proche de vous.</p>
+	</header>
+	<h:form>
+		<p:menubar>
+			<p:menuitem action="listeConseillers" value="Liste conseillers" />
+			<f:facet name="options">
+				<p:outputLabel class="barre"
+					value="Bonjour #{gerantBean.gerant.nom}, " />
+				<p:commandButton class="barre" type="submit" icon="ui-icon-extlink"
+					action="#{gerantBean.deconnexion}" value="Déconnexion" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+
+	<h3>Désignation</h3>
+	<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
+		layout="grid" styleClass="ui-panelgrid-blank">
+		<h:outputLabel value="Nom :" for="#{conseillerBean.conseiller.nom}" />
+		<h:outputText value="#{conseillerBean.conseiller.nom}" />
+
+		<h:outputLabel value="Prenom :" for="#{conseillerBean.conseiller.prenom}" />
+		<h:outputText value="#{conseillerBean.conseiller.prenom}" />
+	</p:panelGrid>
+
+
+
+	<h3>Coordonnées</h3>
+	<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
+		layout="grid" styleClass="ui-panelgrid-blank">
+		<h:outputLabel value="Rue :" for="#{conseillerBean.conseiller.adresse.rue}" />
+		<h:outputText value="#{conseillerBean.conseiller.adresse.rue}" />
+
+		<h:outputLabel value="Code Postal :"
+			for="#{conseillerBean.conseiller.adresse.codePostal}" />
+		<h:outputText value="#{conseillerBean.conseiller.adresse.codePostal}" />
+
+		<h:outputLabel value="Ville :"
+			for="#{conseillerBean.conseiller.adresse.ville}" />
+		<h:outputText value="#{conseillerBean.conseiller.adresse.ville}" />
+	</p:panelGrid>
+
+
+	<h3>Contact</h3>
+	<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
+		layout="grid" styleClass="ui-panelgrid-blank">
+		<h:outputLabel value="Téléphone :"
+			for="#{clientBean.client.telephone}" />
+		<h:outputText value="#{conseillerBean.conseiller.telephone}" />
+
+		<h:outputLabel value="Email :" for="#{clientBean.client.email}" />
+		<h:outputText value="#{conseillerBean.conseiller.email}" />
+	</p:panelGrid>
+
+	<h:form>
+		<p:commandButton value="Modifier" action="modifierConseiller" />
+	</h:form>
+
+
+
+	<h2>Liste des clients</h2>
+	
+	<h:form>
+		<p:dataTable value="#{clientBean.clients}" var="c" border="1" style="width: 700">
+
+			<p:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{c.idPersonne}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Nom</f:facet>
+				<h:outputText value="#{c.nom}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Prénom</f:facet>
+				<h:outputText value="#{c.prenom}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">transferer a un autre conseiller</f:facet>
+				<h:commandLink action="transfertClient"
+					value="transfert">
+					<f:setPropertyActionListener value="#{c}"
+						target="#{clientBean.client}" />
+				</h:commandLink>
+
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>

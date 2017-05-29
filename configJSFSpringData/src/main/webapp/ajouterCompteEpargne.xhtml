@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Ajouter un Compte Epargne</title>
+	<link rel="stylesheet" href="css/style.css" />
+</h:head>
+<h:body>
+	<header>
+		<h1>Proxibanque</h1>
+		<p id="soustitre">La Banque proche de vous.</p>
+	</header>
+	<h:form>
+		<p:menubar>
+		<p:menuitem action="listeClients" value="Liste clients" />
+		<f:facet name="options">
+			<p:outputLabel class="barre" value="Bonjour #{conseillerBean.conseiller.nom}, " />
+			 <p:splitButton value="MonCompte" >
+        <p:menuitem value="Changement mots de Passe"   action="changementPWD" />
+
+    </p:splitButton>
+            <p:commandButton class="barre" type="submit" icon="ui-icon-extlink" action="#{conseillerBean.deconnexion}" value="Déconnexion"/>
+            	
+         </f:facet>
+       </p:menubar>
+	</h:form>
+
+	<h:form>
+		<h2>Ajout Compte courant</h2>
+
+		<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
+			layout="grid" styleClass="ui-panelgrid-blank">
+			<p:outputLabel value="Taux remuneration :" for="remuneration" />
+			<p:inputText id="remuneration" value="#{compteBean.compteEpargne.remuneration}" />
+			<p:outputLabel value="montant offert a l'ouverture:" for="solde" />
+			<p:inputText id="solde" value="#{compteBean.compteEpargne.solde}" />
+		</p:panelGrid>
+		<br/>
+
+		<p:commandButton value="Ajouter"
+			action="#{compteBean.creerCompteEpargne()}" />
+	</h:form>
+
+</h:body>
+</html>

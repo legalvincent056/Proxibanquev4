@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta charset="UTF-8" />
-	<title>Modification du client</title>
+	<title>Modification du conseiller</title>
 	<link rel="stylesheet" href="css/style.css" />
 </h:head>
 <h:body>
@@ -15,16 +15,13 @@
 	</header>
 	<h:form>
 		<p:menubar>
-			<p:menuitem action="listeClients" value="Liste clients" />
-			<p:menuitem action="detailsClient" value="Retour page client" />
+			<p:menuitem action="listeConseillers" value="Liste conseillers" />
+			<p:menuitem action="detailsConseiller" value="Retour page conseiller" />
 			<f:facet name="options">
 				<p:outputLabel class="barre"
-					value="Bonjour #{conseillerBean.conseiller.nom}, " />
-				<p:splitButton value="MonCompte" >
-       			<p:menuitem value="Changement mots de Passe"   action="changementPWD" />
-				
+					value="Bonjour #{gerantBean.gerant.nom}, " />
 				<p:commandButton class="barre" type="submit" icon="ui-icon-extlink"
-					action="#{conseillerBean.deconnexion}" value="Déconnexion" />
+					action="#{gerantBean.deconnexion}" value="Déconnexion" />
 			</f:facet>
 		</p:menubar>
 	</h:form>
@@ -35,36 +32,36 @@
 		<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
 			layout="grid" styleClass="ui-panelgrid-blank">
 			<p:outputLabel value="Nom :" for="nom" />
-			<p:inputText id="nom" value="#{clientBean.client.nom}" />
+			<p:inputText id="nom" value="#{conseillerBean.conseiller.nom}" />
 
 			<p:outputLabel value="Prenom :" for="prenom" />
-			<p:inputText id="prenom" value="#{clientBean.client.prenom}" />
+			<p:inputText id="prenom" value="#{conseillerBean.conseiller.prenom}" />
 		</p:panelGrid>
 		<h3>Coordonnées</h3>
 		<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
 			layout="grid" styleClass="ui-panelgrid-blank">
 			<p:outputLabel value="Rue :" for="rue" />
-			<p:inputText id="rue" value="#{clientBean.client.adresse.rue}" />
+			<p:inputText id="rue" value="#{conseillerBean.conseiller.adresse.rue}" />
 
 			<p:outputLabel value="Code Postal :" for="cp" />
-			<p:inputText id="cp" value="#{clientBean.client.adresse.codePostal}" />
+			<p:inputText id="cp" value="#{conseillerBean.conseiller.adresse.codePostal}" />
 
 			<p:outputLabel value="Ville :" for="ville" />
-			<p:inputText id="ville" value="#{clientBean.client.adresse.ville}" />
+			<p:inputText id="ville" value="#{conseillerBean.conseiller.adresse.ville}" />
 
 		</p:panelGrid>
 		<h3>Contact</h3>
 		<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
 			layout="grid" styleClass="ui-panelgrid-blank">
 			<p:outputLabel value="Téléphone :" for="tel" />
-			<p:inputText id="tel" value="#{clientBean.client.telephone}" />
+			<p:inputText id="tel" value="#{conseillerBean.conseiller.telephone}" />
 
 			<p:outputLabel value="Email :" for="email" />
-			<p:inputText id="email" value="#{clientBean.client.email}" />
+			<p:inputText id="email" value="#{conseillerBean.conseiller.email}" />
 		</p:panelGrid>
 
 		<p:commandButton value="Modifier"
-			action="#{clientBean.modifierClient}" />
+			action="#{conseillerBean.modifierConseiller}" />
 	</h:form>
 
 </h:body>
